@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="es" class="h-full bg-slate-100">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LecturaGen 7J - I.E. Siete de Junio (Catalinayocc)</title>
+    
+    <!-- External Dependencies: Tailwind CSS & Font Awesome -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- External Parsers for PDF and DOCX -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+    <script>pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        patria: {
+                            rojo: '#dc2626',
+                            rojoOscuro: '#991b1b',
+                            blanco: '#ffffff',
+                            azul: '#1d4ed8',
+                            azulOscuro: '#1e3a8a',
+                            azulCielo: '#0284c7',
+                            verde: '#15803d',
+                            verdeClaro: '#22c55e',
+                            verdeEsmeralda: '#047857'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .banner-peru {
+            background: linear-gradient(90deg, #dc2626 0%, #dc2626 33%, #ffffff 33%, #ffffff 66%, #dc2626 66%, #dc2626 100%);
+            height: 5px;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #1e3a8a 0%, #172554 45%, #0f766e 100%);
+        }
+        .card-custom {
+            transition: all 0.25s ease-in-out;
+        }
+        .card-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px -6px rgba(30, 58, 138, 0.15);
+        }
+        .badge-pulse {
+            animation: pulse-glow 2s infinite;
+        }
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.85; transform: scale(1.03); }
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+
+<body class="h-full text-slate-800 antialiased flex flex-col font-sans bg-slate-100">
+
+    <!-- BANDA PATRIÓTICA BICOLOR SUPERIOR -->
+    <div class="banner-peru w-full"></div>
+
+    <!-- CABECERA INSTITUCIONAL CON COMBINACIÓN AZUL, BLANCO, ROJO Y VERDE -->
+    <header class="hero-gradient text-white shadow-xl sticky top-0 z-50 border-b-2 border-emerald-500/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+            <div class="flex items-center justify-between gap-3">
+                
+                <!-- Identidad y Escudo Institucional -->
+                <div class="flex items-center space-x-3.5">
+                    <div id="logoContainer" class="w-13 h-13 sm:w-14 sm:h-14 bg-white p-1 rounded-2xl flex items-center justify-center border-2 border-amber-400 shadow-md overflow-hidden flex-shrink-0 cursor-pointer" onclick="triggerLogoUpload()" title="Haz clic para cambiar el escudo">
+                        <!-- SVG fiel al Escudo I.E. Siete de Junio -->
+                        <svg viewBox="0 0 120 140" class="w-12 h-12">
+                            <path d="M10 20 L60 5 L110 20 L110 85 C110 115 60 135 60 135 C60 135 10 115 10 85 Z" fill="#0284c7" stroke="#eab308" stroke-width="4"/>
+                            <!-- Franja Roja y Blanca Superior -->
+                            <path d="M14 22 L60 8 L106 22 L106 48 L14 48 Z" fill="#dc2626"/>
+                            <rect x="42" y="10" width="36" height="38" fill="#ffffff"/>
+                            <text x="25" y="38" fill="#ffffff" font-weight="900" font-size="18" font-family="Arial">I</text>
+                            <text x="88" y="38" fill="#ffffff" font-weight="900" font-size="18" font-family="Arial">E</text>
+                            <!-- Fondo Verde Central (Retrato) -->
+                            <circle cx="60" cy="80" r="28" fill="#15803d" stroke="#eab308" stroke-width="2"/>
+                            <!-- Círculo interior y Héroe -->
+                            <circle cx="60" cy="80" r="22" fill="#fed7aa"/>
+                            <path d="M48 76 Q60 68 72 76 Q60 84 48 76" fill="#1e293b"/>
+                            <!-- Letras Catalinayocc -->
+                            <text x="60" y="122" fill="#facc15" font-weight="900" font-size="9" text-anchor="middle" font-family="Arial">CATALINAYOCC</text>
+                        </svg>
+                    </div>
+
+                    <div>
+                        <div class="flex items-center gap-2 flex-wrap">
+                            <h1 class="font-heading font-black text-xl sm:text-2xl tracking-tight text-white flex items-center gap-1.5">
+                                LecturaGen <span class="bg-red-600 text-white text-xs px-2.5 py-0.5 rounded-lg font-black tracking-wider shadow">7J</span>
+                            </h1>
+                            <span class="bg-emerald-600 text-white text-[11px] font-bold px-2 py-0.5 rounded-md border border-emerald-400/50 shadow-sm hidden sm:inline-flex items-center gap-1">
+                                <i class="fa-solid fa-seedling text-amber-300"></i> Catalinayocc
+                            </span>
+                        </div>
+                        <p class="text-xs text-sky-100 font-medium">I.E. Pública "Siete de Junio" — Área de Comunicación</p>
+                    </div>
+                </div>
+
+                <!-- Botones de Acción Global -->
+                <div class="flex items-center space-x-2">
+                    <button onclick="triggerLogoUpload()" class="bg-white/10 hover:bg-white/20 text-white text-xs font-semibold px-3 py-2 rounded-xl transition border border-white/20 flex items-center gap-1.5">
+                        <i class="fa-solid fa-camera-rotate text-amber-300"></i>
+                        <span class="hidden md:inline">Cambiar Escudo</span>
+                    </button>
+                    <input type="file" id="logoInput" accept="image/*" class="hidden" onchange="loadCustomLogo(event)">
+                    
+                    <button onclick="switchTab('student')" class="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-extrabold text-xs px-4 py-2 rounded-xl shadow-lg transition flex items-center gap-2 border border-red-400">
+                        <i class="fa-solid fa-graduation-cap text-amber-300 text-sm"></i>
+                        <span>Modo Alumno</span>
+                    </button>
+                </div>
+            </div>
+
+            <nav class="flex space-x-2 mt-3 pt-2.5 border-t border-white/15 overflow-x-auto no-scrollbar">
+                <button onclick="switchTab('creator')" id="tab-creator" class="tab-btn px-4 py-2 text-xs font-extrabold rounded-xl whitespace-nowrap transition flex items-center gap-2 bg-white text-blue-900 shadow-md">
+                    <i class="fa-solid fa-wand-magic-sparkles text-red-600"></i> 1. Creador / Cargar Texto
+                </button>
+                <button onclick="switchTab('sheet')" id="tab-sheet" class="tab-btn px-4 py-2 text-xs font-bold rounded-xl whitespace-nowrap transition text-sky-100 hover:bg-white/10 flex items-center gap-2">
+                    <i class="fa-solid fa-file-invoice text-emerald-400"></i> 2. Ficha Lectora
+                </button>
+                <button onclick="switchTab('student')" id="tab-student" class="tab-btn px-4 py-2 text-xs font-bold rounded-xl whitespace-nowrap transition text-sky-100 hover:bg-white/10 flex items-center gap-2">
+                    <i class="fa-solid fa-user-pen text-amber-300"></i> 3. Responder y Evaluar
+                </button>
+                <button onclick="switchTab('rubric')" id="tab-rubric" class="tab-btn px-4 py-2 text-xs font-bold rounded-xl whitespace-nowrap transition text-sky-100 hover:bg-white/10 flex items-center gap-2">
+                    <i class="fa-solid fa-table-list text-red-400"></i> 4. Rúbrica CNEB
+                </button>
+                <button onclick="switchTab('library')" id="tab-library" class="tab-btn px-4 py-2 text-xs font-bold rounded-xl whitespace-nowrap transition text-sky-100 hover:bg-white/10 flex items-center gap-2">
+                    <i class="fa-solid fa-bookmark text-emerald-300"></i> 5. Biblioteca
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 space-y-6">
+
+        <!-- BANNER DE BIENVENIDA MULTICOLOR (Rojo, Blanco, Azul y Verde) -->
+        <section class="bg-white rounded-3xl p-5 sm:p-6 shadow-md border-t-4 border-red-600 border-x border-b border-slate-200">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-5 items-center">
+                
+                <div class="md:col-span-8 space-y-2">
+                    <div class="flex items-center gap-2 flex-wrap">
+                        <span class="bg-blue-100 text-blue-900 text-xs font-extrabold px-3 py-1 rounded-full flex items-center gap-1.5 border border-blue-200">
+                            <i class="fa-solid fa-book-bookmark text-blue-600"></i> Comprensión Lectora CNEB
+                        </span>
+                        <span class="bg-emerald-100 text-emerald-900 text-xs font-extrabold px-3 py-1 rounded-full flex items-center gap-1.5 border border-emerald-200">
+                            <i class="fa-solid fa-mountain-sun text-emerald-600"></i> Contexto Real Catalinayocc
+                        </span>
+                        <span class="bg-red-100 text-red-900 text-xs font-extrabold px-3 py-1 rounded-full flex items-center gap-1.5 border border-red-200">
+                            <i class="fa-solid fa-medal text-red-600"></i> 1° a 5° de Secundaria
+                        </span>
+                    </div>
+
+                    <h2 class="text-2xl sm:text-3xl font-heading font-black text-slate-900 leading-tight">
+                        Plataforma Pedagógica <span class="text-blue-700">"Siete de Junio"</span>
+                    </h2>
+                    <p class="text-sm text-slate-600 leading-relaxed font-medium">
+                        Crea lecturas contextualizadas a nuestra comunidad de <strong>Catalinayocc</strong>, ajusta la extensión exacta en palabras y párrafos, formula preguntas niveladas (Literal, Inferencial y Crítico) y contrasta los sustentos de tus estudiantes con retroalimentación automática.
+                    </p>
+                </div>
+
+                <!-- Tarjetas resumen con los 4 colores distintivos -->
+                <div class="md:col-span-4 grid grid-cols-2 gap-3">
+                    <div class="bg-blue-50 border-2 border-blue-200 p-3.5 rounded-2xl text-center shadow-sm">
+                        <span class="text-xs font-black text-blue-800 uppercase block">1. Enfoque</span>
+                        <p class="text-lg font-extrabold text-blue-900 mt-0.5">CNEB 2026</p>
+                        <span class="text-[10px] text-blue-600 font-semibold">Competencia 08</span>
+                    </div>
+                    <div class="bg-emerald-50 border-2 border-emerald-200 p-3.5 rounded-2xl text-center shadow-sm">
+                        <span class="text-xs font-black text-emerald-800 uppercase block">2. Ámbito</span>
+                        <p class="text-lg font-extrabold text-emerald-900 mt-0.5">Rural Andino</p>
+                        <span class="text-[10px] text-emerald-600 font-semibold">Saberes Locales</span>
+                    </div>
+                    <div class="bg-red-50 border-2 border-red-200 p-3.5 rounded-2xl text-center shadow-sm">
+                        <span class="text-xs font-black text-red-800 uppercase block">3. Niveles</span>
+                        <p class="text-lg font-extrabold text-red-900 mt-0.5">3 Criterios</p>
+                        <span class="text-[10px] text-red-600 font-semibold">Lit / Inf / Crít</span>
+                    </div>
+                    <div class="bg-slate-900 border-2 border-amber-400 p-3.5 rounded-2xl text-center shadow-sm text-white">
+                        <span class="text-xs font-black text-amber-300 uppercase block">4. Logros</span>
+                        <p class="text-lg font-extrabold text-white mt-0.5">AD - A - B - C</p>
+                        <span class="text-[10px] text-slate-300 font-semibold">Formativo</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- TAB 1: CREADOR / CARGA DE ARCHIVOS -->
+        <section id="view-creator" class="tab-view space-y-6">
+            <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200 space-y-6">
+                
+                <div class="flex items-center justify-between border-b border-slate-100 pb-4 flex-wrap gap-2">
+                    <div>
+                        <h2 class="text-xl font-heading font-extrabold text-blue-900 flex items-center gap-2">
+                            <i class="fa-solid fa-sliders text-red-600"></i> Generador y Creador de Fichas Pedagógicas
+                        </h2>
+                        <p class="text-xs sm:text-sm text-slate-500 mt-0.5">Personaliza la lectura con temas motivacionales, leyendas o historia local de Catalinayocc.</p>
+                    </div>
+                    <span class="bg-emerald-50 text-emerald-700 text-xs font-black px-3 py-1 rounded-full border border-emerald-200">
+                        <i class="fa-solid fa-check-circle mr-1"></i> Modo 100% Operativo
+                    </span>
+                </div>
+
+                <!-- SELECTOR DE ENTRADA: GENERAR CON IA O CARGAR ARCHIVO -->
+                <div class="flex bg-slate-100 p-1.5 rounded-2xl border border-slate-200 max-w-md">
+                    <button type="button" id="modeBtnGen" onclick="toggleInputMode('gen')" class="flex-1 py-2.5 font-extrabold text-xs rounded-xl bg-blue-700 text-white shadow-sm flex items-center justify-center gap-2 transition">
+                        <i class="fa-solid fa-wand-magic-sparkles text-amber-300"></i> 1. Generar con IA
+                    </button>
+                    <button type="button" id="modeBtnUpload" onclick="toggleInputMode('upload')" class="flex-1 py-2.5 font-bold text-xs text-slate-600 rounded-xl hover:text-blue-900 flex items-center justify-center gap-2 transition">
+                        <i class="fa-solid fa-file-import text-emerald-600"></i> 2. Cargar Archivo / Pegar
+                    </button>
+                </div>
+
+                <form id="generatorForm" onsubmit="generateReadingContent(event)" class="space-y-6">
+                    
+                    <!-- RECUADRO DE CARGA DE ARCHIVOS / TEXTO PEGADO -->
+                    <div id="uploadInputSection" class="hidden bg-slate-50 p-5 rounded-2xl border-2 border-dashed border-emerald-400 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-xs font-black text-emerald-900 uppercase tracking-wider flex items-center gap-2">
+                                <i class="fa-solid fa-folder-open text-emerald-600"></i> Subir Documento (.PDF, .DOCX, .TXT) o Pegar Texto
+                            </h3>
+                            <span class="text-[11px] font-bold text-emerald-700 bg-emerald-100 px-2.5 py-0.5 rounded-full">Extracción Local</span>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <!-- Input Archivo -->
+                            <div class="border-2 border-dashed border-blue-300 bg-white p-5 rounded-2xl text-center hover:bg-blue-50 transition cursor-pointer flex flex-col items-center justify-center space-y-2">
+                                <div class="flex items-center gap-3">
+                                    <i class="fa-solid fa-file-pdf text-3xl text-red-600"></i>
+                                    <i class="fa-solid fa-file-word text-3xl text-blue-600"></i>
+                                    <i class="fa-solid fa-file-lines text-3xl text-emerald-600"></i>
+                                </div>
+                                <p class="font-bold text-xs text-slate-800">Selecciona tu archivo (.pdf, .docx, .txt)</p>
+                                <input type="file" id="fileUploadInput" accept=".pdf,.docx,.txt" onchange="handleFileUpload(event)" class="text-xs text-slate-500 w-full file:mr-2 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-blue-100 file:text-blue-800 hover:file:bg-blue-200">
+                                <span id="fileStatusText" class="text-xs text-emerald-700 font-bold hidden">¡Archivo leído exitosamente!</span>
+                            </div>
+
+                            <!-- Textarea Pegar Texto -->
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">O pega el texto directamente aquí:</label>
+                                <textarea id="pastedText" rows="5" class="w-full bg-white border border-slate-300 rounded-xl p-3 text-xs focus:ring-2 focus:ring-blue-600 focus:outline-none" placeholder="Pega aquí el contenido de un texto, cuento o artículo..."></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Checkbox Contextualización a Catalinayocc -->
+                        <div class="flex items-center gap-3 bg-white p-3.5 rounded-xl border border-emerald-300 shadow-sm">
+                            <input type="checkbox" id="chkContextualize" checked class="w-4 h-4 text-emerald-600 rounded focus:ring-emerald-500">
+                            <label for="chkContextualize" class="text-xs font-bold text-emerald-950 cursor-pointer">
+                                ✨ <strong>Contextualizar a la I.E. Siete de Junio:</strong> Adaptar automáticamente personajes, entorno y saberes locales a <strong>Catalinayocc</strong>.
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- PARÁMETROS BÁSICOS CNEB -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                        <!-- Grado -->
+                        <div>
+                            <label class="block text-xs font-black text-slate-700 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                                <i class="fa-solid fa-graduation-cap text-blue-700"></i> Grado Secundario
+                            </label>
+                            <select id="gradeSelect" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-xs sm:text-sm font-semibold rounded-xl p-3 focus:ring-2 focus:ring-blue-600 focus:outline-none">
+                                <option value="1° de Secundaria">1° de Secundaria (Ciclo VI)</option>
+                                <option value="2° de Secundaria">2° de Secundaria (Ciclo VI)</option>
+                                <option value="3° de Secundaria" selected>3° de Secundaria (Ciclo VII)</option>
+                                <option value="4° de Secundaria">4° de Secundaria (Ciclo VII)</option>
+                                <option value="5° de Secundaria">5° de Secundaria (Ciclo VII)</option>
+                            </select>
+                        </div>
+
+                        <!-- Tipo de Texto -->
+                        <div>
+                            <label class="block text-xs font-black text-slate-700 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                                <i class="fa-solid fa-book text-emerald-700"></i> Tipo de Texto
+                            </label>
+                            <select id="textTypeSelect" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-xs sm:text-sm font-semibold rounded-xl p-3 focus:ring-2 focus:ring-emerald-600 focus:outline-none">
+                                <option value="Narrativo / Leyenda Andina">Narrativo (Leyenda / Cuento Andino)</option>
+                                <option value="Expositivo / Científico">Expositivo / Informativo</option>
+                                <option value="Argumentativo / Ensayo">Argumentativo / Ensayo Ciudadano</option>
+                                <option value="Instructivo / Guía">Instructivo / Guía de Saberes</option>
+                            </select>
+                        </div>
+
+                        <!-- Ejes Temáticos Variados -->
+                        <div>
+                            <label class="block text-xs font-black text-slate-700 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                                <i class="fa-solid fa-compass text-red-600"></i> Eje Temático Variado
+                            </label>
+                            <select id="themeSelect" onchange="toggleCustomTopicInput()" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-xs sm:text-sm font-semibold rounded-xl p-3 focus:ring-2 focus:ring-red-600 focus:outline-none">
+                                <option value="Cuidado del Agua y Siembra Hídrica" selected>🌱 Medio Ambiente y Siembra del Agua</option>
+                                <option value="Tradición Oral y Leyendas de Catalinayocc">📜 Mitos y Tradición Oral Andina</option>
+                                <option value="Historias Motivacionales y Superación Escolar">💪 Historias Motivacionales y Resiliencia</option>
+                                <option value="Historia del 7 de Junio y Francisco Bolognesi">🎖️ Historia del 7 de Junio y Bolognesi</option>
+                                <option value="Innovación Agrícola y Saberes Ancestrales">🧬 Agricultura Sostenible y Saberes</option>
+                                <option value="Valores Comunitarios (Ayni y Minka)">🤝 Valores Comunitarios (Ayni y Minka)</option>
+                                <option value="Nutrición Andina y Seguridad Alimentaria">🍎 Nutrición Andina (Quinua, Papa nativa)</option>
+                                <option value="Emprendimiento Juvenil en la Comunidad">🚀 Emprendimiento y Desarrollo Local</option>
+                                <option value="OTRO">✏️ Otro Tema Personalizado...</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Input adicional para tema personalizado -->
+                    <div id="customTopicContainer" class="hidden">
+                        <label class="block text-xs font-black text-slate-700 uppercase tracking-wider mb-2">Especificar Tema Personalizado</label>
+                        <input type="text" id="topicInput" value="" class="w-full bg-slate-50 border border-slate-300 text-slate-800 text-xs sm:text-sm font-semibold rounded-xl p-3 focus:ring-2 focus:ring-blue-600 focus:outline-none" placeholder="Escribe aquí el tema o título específico que deseas abordar...">
+                    </div>
+
+                    <!-- PANEL DE CONTEXTUALIZACIÓN AVANZADA (Personajes, Escenas, Saberes) -->
+                    <div class="bg-gradient-to-br from-emerald-50 to-green-50/60 p-5 rounded-2xl border-2 border-emerald-200 space-y-4 shadow-sm">
+                        <div class="flex items-center justify-between border-b border-emerald-200 pb-2">
+                            <h3 class="text-xs font-black text-emerald-950 uppercase tracking-wider flex items-center gap-2">
+                                <i class="fa-solid fa-users-viewfinder text-emerald-700 text-sm"></i> Contextualización Avanzada a Catalinayocc
+                            </h3>
+                            <span class="text-[11px] font-bold text-emerald-800 bg-white px-2.5 py-0.5 rounded-full border border-emerald-300">Personajes y Escenas</span>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <!-- Personajes -->
+                            <div>
+                                <label class="text-xs font-bold text-slate-700 block mb-1 flex items-center gap-1">
+                                    <i class="fa-solid fa-user-tag text-blue-700"></i> Personajes del Relato
+                                </label>
+                                <input type="text" id="characterInput" value="Doña Asunta, Don Jacinto y los estudiantes de 3°" class="w-full bg-white border border-slate-300 rounded-xl p-2.5 text-xs text-slate-800 focus:ring-2 focus:ring-blue-600 focus:outline-none font-medium">
+                            </div>
+
+                            <!-- Escenarios / Escenas -->
+                            <div>
+                                <label class="text-xs font-bold text-slate-700 block mb-1 flex items-center gap-1">
+                                    <i class="fa-solid fa-location-dot text-red-600"></i> Escenario o Lugar
+                                </label>
+                                <input type="text" id="sceneInput" value="El puquial ancestral y el biohuerto de la I.E. Siete de Junio" class="w-full bg-white border border-slate-300 rounded-xl p-2.5 text-xs text-slate-800 focus:ring-2 focus:ring-red-600 focus:outline-none font-medium">
+                            </div>
+
+                            <!-- Costumbres y Saberes Locales -->
+                            <div>
+                                <label class="text-xs font-bold text-slate-700 block mb-1 flex items-center gap-1">
+                                    <i class="fa-solid fa-seedling text-emerald-700"></i> Saber o Costumbre Local
+                                </label>
+                                <input type="text" id="customsInput" value="La faena comunitaria y la siembra de agua en cochas" class="w-full bg-white border border-slate-300 rounded-xl p-2.5 text-xs text-slate-800 focus:ring-2 focus:ring-emerald-600 focus:outline-none font-medium">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CONTROLES DE EXTENSIÓN DE TEXTO -->
+                    <div class="bg-blue-50/80 p-5 rounded-2xl border-2 border-blue-200 space-y-4 shadow-sm">
+                        <div class="flex items-center justify-between border-b border-blue-200 pb-2">
+                            <h3 class="text-xs font-black text-blue-950 uppercase tracking-wider flex items-center gap-2">
+                                <i class="fa-solid fa-ruler-combined text-blue-700 text-sm"></i> Extensión del Texto (Palabras, Párrafos y Carillas)
+                            </h3>
+                            <span class="text-[11px] font-bold text-blue-800 bg-white px-2.5 py-0.5 rounded-full border border-blue-300">Medida Exacta</span>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <!-- Palabras -->
+                            <div>
+                                <label class="text-xs font-bold text-slate-700 block mb-1 flex items-center gap-1">
+                                    <i class="fa-solid fa-file-word text-blue-700"></i> Palabras Aproximadas
+                                </label>
+                                <select id="wordCountSelect" class="w-full bg-white border border-slate-300 rounded-xl p-2.5 text-xs font-bold text-slate-800 focus:ring-2 focus:ring-blue-600 focus:outline-none">
+                                    <option value="150">150 Palabras (Lectura Rápida)</option>
+                                    <option value="300" selected>300 Palabras (Estándar)</option>
+                                    <option value="500">500 Palabras (Extenso)</option>
+                                    <option value="800">800+ Palabras (Completo)</option>
+                                </select>
+                            </div>
+
+                            <!-- Párrafos -->
+                            <div>
+                                <label class="text-xs font-bold text-slate-700 block mb-1 flex items-center gap-1">
+                                    <i class="fa-solid fa-paragraph text-blue-700"></i> Número de Párrafos
+                                </label>
+                                <select id="paragraphCountSelect" class="w-full bg-white border border-slate-300 rounded-xl p-2.5 text-xs font-bold text-slate-800 focus:ring-2 focus:ring-blue-600 focus:outline-none">
+                                    <option value="2">2 Párrafos</option>
+                                    <option value="3" selected>3 a 4 Párrafos</option>
+                                    <option value="5">5 a 6 Párrafos</option>
+                                    <option value="8">7 a 8 Párrafos</option>
+                                </select>
+                            </div>
+
+                            <!-- Carillas / Hojas -->
+                            <div>
+                                <label class="text-xs font-bold text-slate-700 block mb-1 flex items-center gap-1">
+                                    <i class="fa-solid fa-file-lines text-blue-700"></i> Extensión en Hojas
+                                </label>
+                                <select id="pageExtensionSelect" class="w-full bg-white border border-slate-300 rounded-xl p-2.5 text-xs font-bold text-slate-800 focus:ring-2 focus:ring-blue-600 focus:outline-none">
+                                    <option value="0.5">Media Carilla (0.5 hoja)</option>
+                                    <option value="1" selected>1 Carilla Completa (1 hoja)</option>
+                                    <option value="2">2 Carillas (2 hojas)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- DISTRIBUCIÓN DE PREGUNTAS POR NIVEL CNEB -->
+                    <div class="bg-red-50/70 p-5 rounded-2xl border-2 border-red-200 space-y-3 shadow-sm">
+                        <div class="flex items-center justify-between border-b border-red-200 pb-2">
+                            <h3 class="text-xs font-black text-red-950 uppercase tracking-wider flex items-center gap-2">
+                                <i class="fa-solid fa-list-check text-red-600"></i> Cantidad de Preguntas por Nivel CNEB
+                            </h3>
+                            <span class="text-[11px] font-bold text-red-800 bg-white px-2.5 py-0.5 rounded-full border border-red-300">Evaluación Formativa</span>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <div class="bg-white p-3 rounded-xl border border-red-100 shadow-sm">
+                                <label class="text-xs font-extrabold text-blue-900 block mb-1">📍 Nivel Literal</label>
+                                <input type="number" id="literalCount" min="1" max="5" value="2" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2 text-sm font-black text-center text-blue-900 focus:ring-2 focus:ring-blue-500">
+                                <span class="text-[10px] text-slate-500 mt-1 block">Datos explícitos del texto</span>
+                            </div>
+                            <div class="bg-white p-3 rounded-xl border border-red-100 shadow-sm">
+                                <label class="text-xs font-extrabold text-emerald-900 block mb-1">💡 Nivel Inferencial</label>
+                                <input type="number" id="inferentialCount" min="1" max="5" value="2" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2 text-sm font-black text-center text-emerald-900 focus:ring-2 focus:ring-emerald-500">
+                                <span class="text-[10px] text-slate-500 mt-1 block">Deducciones y conclusiones</span>
+                            </div>
+                            <div class="bg-white p-3 rounded-xl border border-red-100 shadow-sm">
+                                <label class="text-xs font-extrabold text-red-900 block mb-1">⚖️ Nivel Crítico</label>
+                                <input type="number" id="criticalCount" min="1" max="5" value="1" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2 text-sm font-black text-center text-red-900 focus:ring-2 focus:ring-red-500">
+                                <span class="text-[10px] text-slate-500 mt-1 block">Juicio de valor y postura</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- BOTÓN PRINCIPAL DE GENERACIÓN -->
+                    <div class="flex justify-end pt-2">
+                        <button type="submit" id="btnGenerate" class="w-full sm:w-auto bg-gradient-to-r from-blue-700 via-blue-800 to-blue-900 hover:from-blue-600 hover:to-blue-800 text-white font-extrabold px-9 py-4 rounded-2xl shadow-xl transition flex items-center justify-center gap-3 border border-blue-400 text-sm">
+                            <i class="fa-solid fa-wand-magic-sparkles text-amber-300 text-base"></i>
+                            <span id="btnGenLabel">Procesar y Generar Ficha Completa</span>
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+        </section>
+
+        <!-- TAB 2: FICHA LECTORA Y TEXTO GENERADO -->
+        <section id="view-sheet" class="tab-view hidden space-y-6">
+            <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200">
+                
+                <!-- Membrete y Barra de Herramientas -->
+                <div class="flex flex-wrap items-center justify-between gap-3 border-b-2 border-slate-100 pb-4 mb-6">
+                    <div class="flex items-center gap-2 flex-wrap">
+                        <span class="bg-blue-100 text-blue-900 text-xs font-black px-3 py-1 rounded-full border border-blue-300" id="displayGradeTag">3° Secundaria</span>
+                        <span class="bg-emerald-100 text-emerald-900 text-xs font-black px-3 py-1 rounded-full border border-emerald-300" id="displayTypeTag">Narrativo</span>
+                        <span class="bg-red-100 text-red-900 text-xs font-black px-3 py-1 rounded-full border border-red-300" id="displayLengthTag">300 palabras (~1 carilla)</span>
+                    </div>
+
+                    <div class="flex items-center gap-2">
+                        <button onclick="adjustFontSize(-1)" class="p-2 text-slate-700 hover:bg-slate-100 rounded-xl text-xs font-black border" title="Reducir Letra">A-</button>
+                        <button onclick="adjustFontSize(1)" class="p-2 text-slate-700 hover:bg-slate-100 rounded-xl text-xs font-black border" title="Aumentar Letra">A+</button>
+                        <button onclick="readAloudText()" class="bg-blue-50 hover:bg-blue-100 text-blue-800 text-xs font-bold px-3 py-2 rounded-xl transition border border-blue-200 flex items-center gap-1.5">
+                            <i class="fa-solid fa-volume-high text-blue-600"></i> Escuchar
+                        </button>
+                        <button onclick="window.print()" class="bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold px-3.5 py-2 rounded-xl transition flex items-center gap-1.5 shadow">
+                            <i class="fa-solid fa-print text-amber-300"></i> Imprimir / PDF
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Contenedor del Texto Lectura -->
+                <article id="readingContent" class="space-y-4 text-slate-800 leading-relaxed text-base">
+                    <!-- Dinámico -->
+                </article>
+
+                <hr class="my-8 border-slate-200">
+
+                <!-- Cuestionario Docente -->
+                <div>
+                    <h3 class="text-xl font-heading font-black text-blue-900 mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-clipboard-question text-red-600"></i> Cuestionario de Comprensión Formativa
+                    </h3>
+                    <div id="questionsContainer" class="space-y-4">
+                        <!-- Contenido dinámico -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 3: MODO ESTUDIANTE (RESPONDER, DIGITAR Y CONTRASTAR) -->
+        <section id="view-student" class="tab-view hidden space-y-6">
+            
+            <!-- Barra Superior Estudiante -->
+            <div class="bg-gradient-to-r from-blue-900 via-slate-900 to-emerald-900 text-white p-6 rounded-3xl shadow-lg flex flex-wrap items-center justify-between gap-4 border-b-4 border-amber-400">
+                <div>
+                    <span class="bg-red-600 text-white text-[11px] font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider mb-1 inline-block">
+                        I.E. Siete de Junio
+                    </span>
+                    <h2 class="text-xl sm:text-2xl font-heading font-black flex items-center gap-2">
+                        <i class="fa-solid fa-user-graduate text-amber-300"></i> Modo Estudiante: Digitación y Contraste
+                    </h2>
+                    <p class="text-xs text-sky-200 mt-0.5">Lee con atención, marca tu alternativa, digita tu justificación y obtén tu informe CNEB.</p>
+                </div>
+
+                <!-- Cronómetro de Lectura -->
+                <div class="flex items-center gap-3">
+                    <div id="timerDisplay" class="bg-white/10 px-4 py-2 rounded-2xl border border-white/20 font-mono text-xl font-black text-amber-300 shadow-inner">
+                        00:00
+                    </div>
+                    <button onclick="toggleTimer()" id="btnTimer" class="bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs px-4 py-2.5 rounded-xl shadow transition">
+                        Iniciar Tiempo
+                    </button>
+                </div>
+            </div>
+
+            <!-- Contenido Dividido: Texto a la Izquierda y Preguntas a la Derecha -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                
+                <!-- Lectura de Referencia -->
+                <div class="lg:col-span-5 bg-white p-6 rounded-3xl border border-slate-200 h-fit sticky top-24 shadow-sm">
+                    <div class="flex items-center justify-between border-b pb-2 mb-3">
+                        <h3 class="font-black text-sm text-blue-900 flex items-center gap-2">
+                            <i class="fa-solid fa-book-open text-emerald-600"></i> Texto de Lectura
+                        </h3>
+                        <span class="text-[10px] font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-md">Referencia</span>
+                    </div>
+                    <div id="studentReadingReference" class="text-xs sm:text-sm text-slate-700 leading-relaxed max-h-[460px] overflow-y-auto pr-2 space-y-2">
+                        <!-- Copia de la lectura -->
+                    </div>
+                </div>
+
+                <!-- Formulario de Preguntas y Sustentos -->
+                <div class="lg:col-span-7 space-y-6">
+                    <form id="studentAnswerForm" onsubmit="evaluateStudentAnswers(event)" class="space-y-6">
+                        <div id="studentQuestionsList" class="space-y-4">
+                            <!-- Preguntas interactivas -->
+                        </div>
+
+                        <!-- Botones de Acción -->
+                        <div class="bg-white p-4 rounded-2xl border border-slate-200 flex flex-wrap items-center justify-between gap-3 shadow-sm">
+                            <button type="button" onclick="saveDraft()" class="bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold px-4 py-3 rounded-xl transition flex items-center gap-2 border">
+                                <i class="fa-solid fa-floppy-disk text-blue-700"></i> Guardar Borrador
+                            </button>
+                            <button type="submit" class="bg-gradient-to-r from-emerald-600 to-green-700 hover:from-emerald-500 hover:to-green-600 text-white text-xs sm:text-sm font-black px-6 py-3 rounded-xl shadow-lg transition flex items-center gap-2 border border-emerald-400">
+                                <i class="fa-solid fa-circle-check text-amber-300"></i> EVALUAR Y CONTRASTAR RESPUESTAS
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- PANEL DE RESULTADOS Y RETROALIMENTACIÓN FORMATIVA -->
+                    <div id="feedbackPanel" class="hidden bg-white p-6 sm:p-7 rounded-3xl border-2 border-emerald-300 space-y-6 shadow-xl">
+                        <div class="flex items-center justify-between border-b pb-4 flex-wrap gap-2">
+                            <div>
+                                <span class="bg-emerald-100 text-emerald-800 text-xs font-black px-2.5 py-0.5 rounded-full uppercase">Evaluación Culminada</span>
+                                <h3 class="text-xl font-heading font-black text-slate-900 flex items-center gap-2 mt-1">
+                                    <i class="fa-solid fa-chart-pie text-blue-700"></i> Informe de Comprensión Formativa
+                                </h3>
+                            </div>
+                            <div id="cnebGradeBadge" class="px-5 py-2.5 rounded-2xl text-2xl font-black text-white bg-emerald-600 shadow-lg">
+                                AD
+                            </div>
+                        </div>
+
+                        <!-- Métricas -->
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
+                            <div class="bg-blue-50 border border-blue-200 p-3 rounded-2xl">
+                                <span class="block text-[11px] font-bold text-blue-700">Puntaje</span>
+                                <span id="scoreDisplay" class="text-xl font-black text-blue-950">0 / 0</span>
+                            </div>
+                            <div class="bg-emerald-50 border border-emerald-200 p-3 rounded-2xl">
+                                <span class="block text-[11px] font-bold text-emerald-700">Porcentaje</span>
+                                <span id="percentDisplay" class="text-xl font-black text-emerald-950">0%</span>
+                            </div>
+                            <div class="bg-red-50 border border-red-200 p-3 rounded-2xl">
+                                <span class="block text-[11px] font-bold text-red-700">Tiempo</span>
+                                <span id="timeTakenDisplay" class="text-xl font-black text-red-950">00:00</span>
+                            </div>
+                            <div class="bg-slate-900 border border-amber-400 p-3 rounded-2xl text-white">
+                                <span class="block text-[11px] font-bold text-amber-300">Nivel de Logro</span>
+                                <span id="levelLabelDisplay" class="text-xs font-black text-white uppercase mt-0.5 block">Logro Esperado</span>
+                            </div>
+                        </div>
+
+                        <!-- Detalle por Pregunta -->
+                        <div id="feedbackDetails" class="space-y-4 border-t pt-4">
+                            <!-- Detalle dinámico -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- TAB 4: RÚBRICA CNEB -->
+        <section id="view-rubric" class="tab-view hidden space-y-6">
+            <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200 space-y-4">
+                <div class="flex items-center justify-between border-b pb-3 flex-wrap gap-2">
+                    <div>
+                        <h2 class="text-xl font-heading font-black text-blue-900 flex items-center gap-2">
+                            <i class="fa-solid fa-table text-red-600"></i> Matriz de Evaluación Pedagógica CNEB
+                        </h2>
+                        <p class="text-xs text-slate-500">Área de Comunicación — Competencia: "Lee diversos tipos de textos en su lengua materna"</p>
+                    </div>
+                    <span class="bg-blue-100 text-blue-800 text-xs font-black px-3 py-1 rounded-full">I.E. Siete de Junio</span>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-xs text-left text-slate-700 border-collapse">
+                        <thead class="bg-slate-100 text-slate-900 uppercase font-black border-b-2">
+                            <tr>
+                                <th class="p-3.5 border bg-slate-200">Capacidad / Criterio</th>
+                                <th class="p-3.5 border bg-red-100 text-red-900">En Inicio (C)</th>
+                                <th class="p-3.5 border bg-amber-100 text-amber-900">En Proceso (B)</th>
+                                <th class="p-3.5 border bg-blue-100 text-blue-900">Logro Esperado (A)</th>
+                                <th class="p-3.5 border bg-emerald-100 text-emerald-900">Logro Destacado (AD)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y font-medium">
+                            <tr>
+                                <td class="p-3.5 font-bold border bg-slate-50 text-blue-900">Obtiene información (Literal)</td>
+                                <td class="p-3.5 border">Menciona datos aislados o imprecisos con dificultad.</td>
+                                <td class="p-3.5 border">Identifica información explícita básica del texto.</td>
+                                <td class="p-3.5 border">Localiza datos explícitos relevantes con total precisión.</td>
+                                <td class="p-3.5 border">Sintetiza e integra datos explícitos complejos de Catalinayocc.</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3.5 font-bold border bg-slate-50 text-emerald-900">Infiere e interpreta (Inferencial)</td>
+                                <td class="p-3.5 border">Dificultad para deducir relaciones de causa-efecto.</td>
+                                <td class="p-3.5 border">Deduce conclusiones elementales sobre el relato.</td>
+                                <td class="p-3.5 border">Establece conclusiones e intenciones implícitas con claridad.</td>
+                                <td class="p-3.5 border">Interpreta sentidos figurados y contextos socioculturales.</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3.5 font-bold border bg-slate-50 text-red-900">Reflexiona y evalúa (Crítico)</td>
+                                <td class="p-3.5 border">No emite opinión o su postura es ajena al tema.</td>
+                                <td class="p-3.5 border">Opina sobre el tema sin sustento sólido.</td>
+                                <td class="p-3.5 border">Sustenta su punto de vista con argumentos claros y coherentes.</td>
+                                <td class="p-3.5 border">Evalúa críticamente la forma, contenido y contexto con ética comunitaria.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 5: BIBLIOTECA -->
+        <section id="view-library" class="tab-view hidden space-y-6">
+            <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200">
+                <div class="border-b pb-3 mb-4 flex items-center justify-between">
+                    <h2 class="text-xl font-heading font-black text-blue-900 flex items-center gap-2">
+                        <i class="fa-solid fa-bookmark text-emerald-600"></i> Fichas Guardadas en la Biblioteca Local
+                    </h2>
+                    <span class="text-xs text-slate-500 font-semibold">Historial rápido de lecturas</span>
+                </div>
+                <div id="libraryContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- Dinámico -->
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        let currentDataset = null;
+        let fontSizePx = 16;
+        let timerSeconds = 0;
+        let timerInterval = null;
+        let timerRunning = false;
+        let activeInputMode = 'gen';
+        let extractedFileText = '';
+
+        // DATASET PREDETERMINADO INICIAL
+        const defaultReadingData = {
+            title: "La Siembra del Agua y la Sabiduría en Catalinayocc",
+            grade: "3° de Secundaria",
+            type: "Narrativo / Leyenda Andina",
+            topic: "Cuidado del Agua y Siembra Hídrica",
+            wordCount: 300,
+            paragraphCount: 3,
+            pageExtension: 1,
+            text: `En lo alto de las colinas de Catalinayocc, los pobladores relatan con orgullo la historia de Doña Asunta y Don Jacinto, dos ancianos sabios que custodiaban el puquial ancestral de la comunidad. Hace varios años, una intensa sequía amenazaba las parcelas de papa nativa y maíz. Mientras la desesperación se apoderaba del pueblo, Doña Asunta convocó a los jóvenes y estudiantes de la I.E. Siete de Junio para organizar una gran minka comunitaria orientada a limpiar las acequias de piedra y sembrar agua mediante cochas en las partes altas.
+
+Gracias a la unión y el trabajo colectivo, los manantiales volvieron a brotar con agua cristalina. Sin embargo, Don Jacinto siempre recordaba a los estudiantes que el agua no es simplemente una mercancía, sino un ser vivo al que la comunidad debe respetar, cuidar y agradecer mediante las faenas y el cuidado de los pastos naturales.
+
+Hoy en día, las familias de Catalinayocc y los estudiantes de la I.E. Siete de Junio mantienen encendida esta herencia ancestral, fusionando el respeto por la naturaleza con los conocimientos científicos modernos para garantizar el bienestar de las futuras generaciones.`,
+            questions: [
+                {
+                    id: 1,
+                    type: "literal",
+                    levelName: "Literal",
+                    question: "¿Qué labor organizaron Doña Asunta y los estudiantes para enfrentar la sequía en Catalinayocc?",
+                    options: [
+                        "A) Compraron agua embotellada de la ciudad más cercana.",
+                        "B) Realizaron una minka para limpiar acequias de piedra y construir cochas.",
+                        "C) Abandonaron sus tierras para emigrar a la capital.",
+                        "D) Esperaron pasivamente a que llegara la temporada de lluvias."
+                    ],
+                    correctIndex: 1,
+                    explanation: "El texto afirma explícitamente que convocaron a una gran minka comunitaria para limpiar las acequias de piedra y sembrar agua en cochas."
+                },
+                {
+                    id: 2,
+                    type: "inferential",
+                    levelName: "Inferencial",
+                    question: "¿Qué valor comunitario promueve principalmente la enseñanza de Don Jacinto y Doña Asunta?",
+                    options: [
+                        "A) El individualismo en el cultivo de las parcelas.",
+                        "B) La reciprocidad, el respeto ético a la naturaleza y el trabajo en equipo.",
+                        "C) El rechazo total a los saberes ancestrales de la región.",
+                        "D) La comercialización lucrativa del agua comunitaria."
+                    ],
+                    correctIndex: 1,
+                    explanation: "Se deduce a partir de la visión del agua como 'ser vivo' y la realización de la minka, lo que promueve el trabajo colectivo y el respeto ambiental."
+                },
+                {
+                    id: 3,
+                    type: "critical",
+                    levelName: "Crítico",
+                    question: "¿Por qué es fundamental que los estudiantes de la I.E. Siete de Junio asuman el agua como un 'ser vivo' en el contexto del cambio climático actual?",
+                    options: [
+                        "A) Porque justifica el incremento de los precios de las cosechas.",
+                        "B) Porque fomenta una ética de preservación ambiental y compromiso ciudadano con su pueblo.",
+                        "C) Porque imposibilita el uso técnico y agrícola del agua.",
+                        "D) Porque las tradiciones carecen de valor en el mundo contemporáneo."
+                    ],
+                    correctIndex: 1,
+                    explanation: "Concebir el agua desde una perspectiva ética y comunitaria orienta a los estudiantes a proteger activamente sus fuentes hídricas frente a la escasez."
+                }
+            ]
+        };
+
+        function switchTab(tabName) {
+            const views = document.querySelectorAll('.tab-view');
+            views.forEach(v => v.classList.add('hidden'));
+
+            const tabs = document.querySelectorAll('.tab-btn');
+            tabs.forEach(t => {
+                t.classList.remove('bg-white', 'text-blue-900', 'shadow-md', 'font-extrabold');
+                t.classList.add('text-sky-100', 'hover:bg-white/10', 'font-bold');
+            });
+
+            const targetView = id(`view-${tabName}`);
+            if (targetView) targetView.classList.remove('hidden');
+
+            const targetBtn = id(`tab-${tabName}`);
+            if (targetBtn) {
+                targetBtn.classList.remove('text-sky-100', 'hover:bg-white/10');
+                targetBtn.classList.add('bg-white', 'text-blue-900', 'shadow-md', 'font-extrabold');
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleInputMode(mode) {
+            activeInputMode = mode;
+            const btnGen = id('modeBtnGen');
+            const btnUpload = id('modeBtnUpload');
+            const uploadSection = id('uploadInputSection');
+
+            if (mode === 'gen') {
+                uploadSection.classList.add('hidden');
+                btnGen.className = "flex-1 py-2.5 font-extrabold text-xs rounded-xl bg-blue-700 text-white shadow-sm flex items-center justify-center gap-2 transition";
+                btnUpload.className = "flex-1 py-2.5 font-bold text-xs text-slate-600 rounded-xl hover:text-blue-900 flex items-center justify-center gap-2 transition";
+            } else {
+                uploadSection.classList.remove('hidden');
+                btnUpload.className = "flex-1 py-2.5 font-extrabold text-xs rounded-xl bg-emerald-700 text-white shadow-sm flex items-center justify-center gap-2 transition";
+                btnGen.className = "flex-1 py-2.5 font-bold text-xs text-slate-600 rounded-xl hover:text-blue-900 flex items-center justify-center gap-2 transition";
+            }
+        }
+
+        async function handleFileUpload(event) {
+            const file = event.target.files[0];
+            const statusText = id('fileStatusText');
+            if (!file) return;
+
+            statusText.innerText = "Extrayendo texto...";
+            statusText.classList.remove('hidden', 'text-emerald-700', 'text-red-600');
+            statusText.classList.add('text-blue-700');
+
+            try {
+                if (file.name.endsWith('.pdf')) {
+                    const reader = new FileReader();
+                    reader.onload = async function() {
+                        const typedarray = new Uint8Array(this.result);
+                        const pdf = await pdfjsLib.getDocument(typedarray).promise;
+                        let fullText = "";
+                        for (let i = 1; i <= pdf.numPages; i++) {
+                            const page = await pdf.getPage(i);
+                            const content = await page.getTextContent();
+                            fullText += content.items.map(s => s.str).join(" ") + "\n";
+                        }
+                        extractedFileText = fullText;
+                        statusText.innerText = `¡PDF cargado con éxito! (${pdf.numPages} pág.)`;
+                        statusText.className = "text-xs text-emerald-700 font-bold block mt-1";
+                    };
+                    reader.readAsArrayBuffer(file);
+                } else if (file.name.endsWith('.docx')) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        mammoth.extractRawText({ arrayBuffer: e.target.result })
+                            .then(result => {
+                                extractedFileText = result.value;
+                                statusText.innerText = "¡Documento Word leído con éxito!";
+                                statusText.className = "text-xs text-emerald-700 font-bold block mt-1";
+                            })
+                            .catch(err => {
+                                statusText.innerText = "Error en Word: " + err.message;
+                                statusText.className = "text-xs text-red-600 font-bold block mt-1";
+                            });
+                    };
+                    reader.readAsArrayBuffer(file);
+                } else {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        extractedFileText = e.target.result;
+                        statusText.innerText = "¡Archivo de texto leído con éxito!";
+                        statusText.className = "text-xs text-emerald-700 font-bold block mt-1";
+                    };
+                    reader.readAsText(file);
+                }
+            } catch (err) {
+                statusText.innerText = "No se pudo procesar el archivo.";
+                statusText.className = "text-xs text-red-600 font-bold block mt-1";
+            }
+        }
+
+        function toggleCustomTopicInput() {
+            const themeVal = id('themeSelect').value;
+            const container = id('customTopicContainer');
+            if (themeVal === 'OTRO') {
+                container.classList.remove('hidden');
+            } else {
+                container.classList.add('hidden');
+            }
+        }
+
+        function generateStructuredText(topic, grade, targetWords, paragraphCount, characters, scene, customs) {
+            const paragraphs = [];
+            const charNames = characters || "Doña Asunta, Don Jacinto y los estudiantes";
+            const sceneName = scene || "la comunidad de Catalinayocc y la I.E. Siete de Junio";
+            const customVal = customs || "las faenas comunales y el cuidado del puquial";
+
+            for (let i = 1; i <= paragraphCount; i++) {
+                if (i === 1) {
+                    paragraphs.push(`En el corazón de ${sceneName}, los estudiantes de ${grade} junto a ${charNames} impulsaron una valiosa iniciativa centrada en "${topic}". Mediante ${customVal}, los pobladores recordaron cómo el diálogo intergeneracional fortalece la identidad andina y la convivencia comunitaria ante los desafíos del presente.`);
+                } else if (i === paragraphCount) {
+                    paragraphs.push(`En conclusión, el aprendizaje compartido en ${sceneName} con la guía de ${charNames} demuestra que reflexionar sobre "${topic}" a través de ${customVal} inspira a los alumnos de ${grade} de la I.E. Siete de Junio a convertirse en ciudadanos comprometidos con el desarrollo ético, cultural y ambiental de Catalinayocc.`);
+                } else {
+                    paragraphs.push(`Asimismo, en las actividades desarrolladas en ${sceneName}, ${charNames} explicaron la necesidad de revalorar las tradiciones ancestrales y articularlas armónicamente con los avances científicos. Esta sinergia permitió que toda la comunidad escolar comprendiera la trascendencia de "${topic}" en la vida cotidiana de las familias.`);
+                }
+            }
+
+            return paragraphs.join("\n\n");
+        }
+
+        function generateReadingContent(e) {
+            e.preventDefault();
+
+            const grade = id('gradeSelect').value;
+            const type = id('textTypeSelect').value;
+            
+            const selectedTheme = id('themeSelect').value;
+            let topic = selectedTheme;
+            if (selectedTheme === 'OTRO') {
+                topic = id('topicInput').value.trim() || "Saberes y Tradiciones de Catalinayocc";
+            }
+
+            const characters = id('characterInput').value.trim();
+            const scene = id('sceneInput').value.trim();
+            const customs = id('customsInput').value.trim();
+
+            const targetWords = parseInt(id('wordCountSelect').value) || 300;
+            const targetParagraphs = parseInt(id('paragraphCountSelect').value) || 3;
+            const targetPages = parseFloat(id('pageExtensionSelect').value) || 1;
+
+            const litCount = parseInt(id('literalCount').value) || 2;
+            const infCount = parseInt(id('inferentialCount').value) || 2;
+            const critCount = parseInt(id('criticalCount').value) || 1;
+
+            const btn = id('btnGenerate');
+            btn.disabled = true;
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin text-amber-300"></i> Generando Ficha Contextualizada (${targetWords} palabras)...`;
+
+            setTimeout(() => {
+                let readingBody = "";
+                let isCustomLoaded = false;
+
+                if (activeInputMode === 'upload') {
+                    const pasted = id('pastedText').value.trim();
+                    readingBody = extractedFileText.trim() || pasted;
+
+                    if (!readingBody) {
+                        alert("Por favor selecciona un archivo (.pdf, .docx, .txt) o pega un texto.");
+                        btn.disabled = false;
+                        btn.innerHTML = `<i class="fa-solid fa-wand-magic-sparkles text-amber-300"></i> Procesar y Generar Ficha Completa`;
+                        return;
+                    }
+
+                    isCustomLoaded = true;
+                    if (id('chkContextualize').checked) {
+                        readingBody = `[Lectura Contextualizada — I.E. Siete de Junio - Catalinayocc]\n\n` + 
+                            readingBody.replace(/la ciudad/gi, scene || 'Catalinayocc')
+                                       .replace(/los estudiantes/gi, `${characters || 'los estudiantes'} de ${grade} de la I.E. Siete de Junio`);
+                    }
+                } else {
+                    readingBody = generateStructuredText(topic, grade, targetWords, targetParagraphs, characters, scene, customs);
+                }
+
+                // Generar Cuestionario Nivelado Dinámico
+                const questions = [];
+                let qId = 1;
+
+                for (let i = 0; i < litCount; i++) {
+                    questions.push({
+                        id: qId++,
+                        type: "literal",
+                        levelName: "Literal",
+                        question: `[Literal ${i+1}] Según el texto, ¿qué acción o hecho explícito se describe respecto a "${topic}" por parte de ${characters || 'los personajes'}?`,
+                        options: [
+                            `A) El compromiso activo para fortalecer ${topic} en ${scene || 'Catalinayocc'}.`,
+                            "B) El abandono definitivo de los saberes y costumbres comunitarias.",
+                            "C) La emigración forzada de los alumnos a la costa.",
+                            "D) La suspensión total de las minkas y faenas comunales."
+                        ],
+                        correctIndex: 0,
+                        explanation: `El texto describe explícitamente cómo ${characters || 'los protagonistas'} participan activamente en torno a ${topic}.`
+                    });
+                }
+
+                for (let i = 0; i < infCount; i++) {
+                    questions.push({
+                        id: qId++,
+                        type: "inferential",
+                        levelName: "Inferencial",
+                        question: `[Inferencial ${i+1}] A partir del texto, ¿qué se puede deducir sobre la práctica de ${customs || 'las faenas'} en los jóvenes de ${grade}?`,
+                        options: [
+                            "A) Fortalece el sentido de pertenencia, la solidaridad comunitaria y la identidad escolar.",
+                            "B) Provoca desinterés por el aprendizaje escolar.",
+                            "C) Disminuye la comunicación entre ancianos y jóvenes de Catalinayocc.",
+                            "D) Afecta negativamente el trabajo en equipo."
+                        ],
+                        correctIndex: 0,
+                        explanation: "Se deduce que la colaboración intergeneracional fomenta la cohesión social y la identidad cultural."
+                    });
+                }
+
+                for (let i = 0; i < critCount; i++) {
+                    questions.push({
+                        id: qId++,
+                        type: "critical",
+                        levelName: "Crítico",
+                        question: `[Crítico ${i+1}] ¿Por qué resulta relevante para tu vida y comunidad la experiencia sobre "${topic}" desarrollada en ${scene || 'Catalinayocc'}?`,
+                        options: [
+                            "A) Porque demuestra la importancia de asumir una actitud solidaria y responsable con el entorno social y ambiental.",
+                            "B) Porque las tradiciones locales carecen de valor en el mundo moderno.",
+                            "C) Porque la preservación ambiental es exclusiva responsabilidad del estado.",
+                            "D) Porque promueve una postura pasiva frente a los problemas comunales."
+                        ],
+                        correctIndex: 0,
+                        explanation: "Invita al estudiante a fundamentar un juicio ético sobre la responsabilidad comunitaria y el cuidado del entorno."
+                    });
+                }
+
+                currentDataset = {
+                    title: isCustomLoaded ? `Lectura Contextualizada: ${topic}` : `${topic} en Catalinayocc`,
+                    grade: grade,
+                    type: type,
+                    topic: topic,
+                    wordCount: targetWords,
+                    paragraphCount: targetParagraphs,
+                    pageExtension: targetPages,
+                    text: readingBody,
+                    questions: questions
+                };
+
+                btn.disabled = false;
+                btn.innerHTML = `<i class="fa-solid fa-wand-magic-sparkles text-amber-300"></i> Procesar y Generar Ficha Completa`;
+
+                renderCurrentSheet();
+                renderStudentMode();
+                saveToLibrary(currentDataset);
+                switchTab('sheet');
+            }, 500);
+        }
+
+        function renderCurrentSheet() {
+            if (!currentDataset) return;
+
+            id('displayGradeTag').innerText = currentDataset.grade;
+            id('displayTypeTag').innerText = currentDataset.type;
+            id('displayLengthTag').innerText = `${currentDataset.wordCount || 300} palabras (~${currentDataset.pageExtension || 1} carilla/s)`;
+
+            id('readingContent').innerHTML = `
+                <div class="border-b-2 border-red-600/30 pb-3 mb-4">
+                    <span class="text-xs font-black text-red-600 uppercase tracking-widest block">I.E. Siete de Junio — Catalinayocc</span>
+                    <h2 class="text-2xl sm:text-3xl font-heading font-black text-blue-950 mt-1">${currentDataset.title}</h2>
+                </div>
+                <div class="whitespace-pre-line leading-relaxed text-slate-800 text-justify text-sm sm:text-base">${currentDataset.text}</div>
+            `;
+
+            const qContainer = id('questionsContainer');
+            qContainer.innerHTML = '';
+
+            currentDataset.questions.forEach((q, idx) => {
+                const qEl = document.createElement('div');
+                qEl.className = "p-4 sm:p-5 bg-slate-50 rounded-2xl border-l-4 border-l-blue-700 border border-slate-200 space-y-2";
+                qEl.innerHTML = `
+                    <div class="flex items-center gap-2">
+                        <span class="bg-blue-800 text-white text-[11px] font-black px-2.5 py-0.5 rounded-md">Pregunta ${idx + 1} (${q.levelName})</span>
+                    </div>
+                    <p class="font-extrabold text-slate-900 text-sm sm:text-base">${q.question}</p>
+                    <ul class="text-xs sm:text-sm text-slate-700 space-y-1.5 pl-2 font-medium">
+                        ${q.options.map(opt => `<li class="p-1 rounded">${opt}</li>`).join('')}
+                    </ul>
+                `;
+                qContainer.appendChild(qEl);
+            });
+        }
+
+        function renderStudentMode() {
+            if (!currentDataset) return;
+
+            id('studentReadingReference').innerHTML = `
+                <h4 class="font-black text-blue-900 text-base mb-2 border-b pb-1">${currentDataset.title}</h4>
+                <div class="whitespace-pre-line leading-relaxed text-slate-700 text-xs sm:text-sm">${currentDataset.text}</div>
+            `;
+
+            const container = id('studentQuestionsList');
+            container.innerHTML = '';
+
+            currentDataset.questions.forEach((q, idx) => {
+                const card = document.createElement('div');
+                card.className = "bg-white p-5 sm:p-6 rounded-3xl border border-slate-200 space-y-4 shadow-sm";
+                card.innerHTML = `
+                    <div class="flex items-center justify-between border-b pb-2">
+                        <span class="text-xs font-black uppercase tracking-wider text-blue-900 bg-blue-100 px-3 py-1 rounded-full border border-blue-200">
+                            P${idx + 1}. Nivel ${q.levelName}
+                        </span>
+                        <span class="text-[11px] font-bold text-slate-500">I.E. Siete de Junio</span>
+                    </div>
+                    <p class="text-sm sm:text-base font-extrabold text-slate-900">${q.question}</p>
+                    
+                    <div class="space-y-2 pt-1">
+                        ${q.options.map((opt, oIdx) => `
+                            <label class="flex items-start gap-3 p-3.5 rounded-2xl border border-slate-200 hover:bg-blue-50/60 cursor-pointer transition">
+                                <input type="radio" name="q_${q.id}" value="${oIdx}" class="mt-1 text-blue-600 focus:ring-blue-500">
+                                <span class="text-xs sm:text-sm text-slate-800 font-medium">${opt}</span>
+                            </label>
+                        `).join('')}
+                    </div>
+
+                    <div class="pt-2 bg-slate-50 p-3.5 rounded-2xl border border-slate-200">
+                        <label class="block text-xs font-black text-slate-700 mb-1 flex items-center gap-1.5">
+                            <i class="fa-solid fa-pen-nib text-emerald-700"></i> Digita tu Justificación o Sustento:
+                        </label>
+                        <textarea id="justification_${q.id}" rows="2" class="w-full bg-white border border-slate-300 rounded-xl p-2.5 text-xs text-slate-800 focus:ring-2 focus:ring-blue-600 focus:outline-none font-medium" placeholder="Escribe por qué elegiste esta alternativa con tus propias palabras..."></textarea>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function evaluateStudentAnswers(e) {
+            e.preventDefault();
+
+            let score = 0;
+            const total = currentDataset.questions.length;
+            const detailsContainer = id('feedbackDetails');
+            detailsContainer.innerHTML = '';
+
+            currentDataset.questions.forEach((q, idx) => {
+                const selectedRadio = document.querySelector(`input[name="q_${q.id}"]:checked`);
+                const userChoice = selectedRadio ? parseInt(selectedRadio.value) : -1;
+                const isCorrect = userChoice === q.correctIndex;
+
+                if (isCorrect) score++;
+
+                const userTextChoice = userChoice >= 0 ? q.options[userChoice] : "Sin respuesta marcada";
+                const correctTextChoice = q.options[q.correctIndex];
+                const justification = id(`justification_${q.id}`).value || "Sin sustento digitado.";
+
+                const item = document.createElement('div');
+                item.className = `p-4 sm:p-5 rounded-2xl border-2 ${isCorrect ? 'bg-emerald-50/80 border-emerald-300' : 'bg-red-50/80 border-red-300'}`;
+                item.innerHTML = `
+                    <div class="flex items-center gap-2 mb-2">
+                        <i class="fa-solid ${isCorrect ? 'fa-circle-check text-emerald-600' : 'fa-circle-xmark text-red-600'} text-lg"></i>
+                        <span class="font-black text-xs uppercase ${isCorrect ? 'text-emerald-950' : 'text-red-950'}">Pregunta ${idx + 1} (${q.levelName}) — ${isCorrect ? '¡Correcto!' : 'Para Reflexionar'}</span>
+                    </div>
+                    <p class="text-xs sm:text-sm font-extrabold text-slate-900 mb-2">${q.question}</p>
+                    <div class="text-xs sm:text-sm space-y-1.5 text-slate-800">
+                        <p><strong>Tu Respuesta:</strong> ${userTextChoice}</p>
+                        <p class="text-emerald-900"><strong>Clave Docente:</strong> ${correctTextChoice}</p>
+                        <div class="bg-white p-3 rounded-xl border border-slate-200 mt-2">
+                            <strong class="text-blue-900">Tu Sustento Digitado:</strong>
+                            <p class="italic text-slate-700 mt-0.5">"${justification}"</p>
+                        </div>
+                        <p class="text-blue-900 font-semibold pt-1">💡 <strong>Orientación Pedagógica:</strong> ${q.explanation}</p>
+                    </div>
+                `;
+                detailsContainer.appendChild(item);
+            });
+
+            const percent = Math.round((score / total) * 100);
+            id('scoreDisplay').innerText = `${score} / ${total}`;
+            id('percentDisplay').innerText = `${percent}%`;
+            id('timeTakenDisplay').innerText = id('timerDisplay').innerText;
+
+            let cnebGrade = 'C';
+            let label = 'En Inicio';
+            let colorClass = 'bg-red-600';
+
+            if (percent >= 90) { cnebGrade = 'AD'; label = 'Logro Destacado'; colorClass = 'bg-emerald-600'; }
+            else if (percent >= 70) { cnebGrade = 'A'; label = 'Logro Esperado'; colorClass = 'bg-blue-700'; }
+            else if (percent >= 50) { cnebGrade = 'B'; label = 'En Proceso'; colorClass = 'bg-amber-500'; }
+
+            const badge = id('cnebGradeBadge');
+            badge.innerText = cnebGrade;
+            badge.className = `px-5 py-2.5 rounded-2xl text-2xl font-black text-white ${colorClass} shadow-lg`;
+            id('levelLabelDisplay').innerText = label;
+
+            id('feedbackPanel').classList.remove('hidden');
+            id('feedbackPanel').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function toggleTimer() {
+            const btn = id('btnTimer');
+            if (timerRunning) {
+                clearInterval(timerInterval);
+                timerRunning = false;
+                btn.innerText = "Reanudar Tiempo";
+                btn.className = "bg-blue-700 hover:bg-blue-800 text-white font-extrabold text-xs px-4 py-2.5 rounded-xl shadow transition";
+            } else {
+                timerRunning = true;
+                btn.innerText = "Pausar Tiempo";
+                btn.className = "bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold text-xs px-4 py-2.5 rounded-xl shadow transition";
+                timerInterval = setInterval(() => {
+                    timerSeconds++;
+                    const mins = String(Math.floor(timerSeconds / 60)).padStart(2, '0');
+                    const secs = String(timerSeconds % 60).padStart(2, '0');
+                    id('timerDisplay').innerText = `${mins}:${secs}`;
+                }, 1000);
+            }
+        }
+
+        function saveDraft() {
+            alert("¡Borrador guardado exitosamente en tu navegador!");
+        }
+
+        function adjustFontSize(delta) {
+            fontSizePx = Math.max(12, Math.min(24, fontSizePx + delta));
+            id('readingContent').style.fontSize = `${fontSizePx}px`;
+        }
+
+        function readAloudText() {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const text = id('readingContent').innerText;
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'es-ES';
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert("Tu navegador no soporta lectura en voz alta.");
+            }
+        }
+
+        function triggerLogoUpload() {
+            id('logoInput').click();
+        }
+
+        function loadCustomLogo(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    id('logoContainer').innerHTML = `<img src="${e.target.result}" class="w-full h-full object-contain" alt="Escudo">`;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function saveToLibrary(item) {
+            let list = JSON.parse(localStorage.getItem('lecturagen_7j_lib') || '[]');
+            list.unshift(item);
+            if (list.length > 6) list.pop();
+            localStorage.setItem('lecturagen_7j_lib', JSON.stringify(list));
+            loadLibraryItems();
+        }
+
+        function loadLibraryItems() {
+            const list = JSON.parse(localStorage.getItem('lecturagen_7j_lib') || '[]');
+            const container = id('libraryContainer');
+            if (!container) return;
+
+            if (list.length === 0) {
+                container.innerHTML = `<p class="text-xs text-slate-400 col-span-3">No hay fichas guardadas aún. Las fichas generadas se archivarán aquí automáticamente.</p>`;
+                return;
+            }
+
+            container.innerHTML = '';
+            list.forEach((data) => {
+                const card = document.createElement('div');
+                card.className = "bg-white p-5 rounded-2xl border border-slate-200 space-y-2 card-custom cursor-pointer shadow-sm border-t-4 border-t-blue-700";
+                card.onclick = () => {
+                    currentDataset = data;
+                    renderCurrentSheet();
+                    renderStudentMode();
+                    switchTab('sheet');
+                };
+                card.innerHTML = `
+                    <div class="flex items-center justify-between">
+                        <span class="text-[11px] font-black text-blue-900 bg-blue-100 px-2 py-0.5 rounded-md">${data.grade}</span>
+                        <span class="text-[10px] text-slate-400 font-bold">${data.wordCount || 300} palabras</span>
+                    </div>
+                    <h4 class="font-black text-sm text-slate-900 line-clamp-1">${data.title}</h4>
+                    <p class="text-xs text-slate-600 line-clamp-2">${data.text}</p>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function id(elId) {
+            return document.getElementById(elId);
+        }
+
+        // Inicialización en carga de ventana
+        window.addEventListener('DOMContentLoaded', () => {
+            currentDataset = defaultReadingData;
+            renderCurrentSheet();
+            renderStudentMode();
+            loadLibraryItems();
+        });
+    </script>
+</body>
+</html>
